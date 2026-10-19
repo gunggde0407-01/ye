@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Open Recruitment Forum GenRe Kabupaten Badung Season 4</title>
   <style>
-    
     *, *::before, *::after {
       margin: 0;
       padding: 0;
@@ -28,7 +27,6 @@
       justify-content: center;
     }
 
-    
     .bg-wrapper {
       position: fixed;
       inset: 0;
@@ -63,7 +61,6 @@
       pointer-events: none;
     }
 
-    
     .phone-frame {
       position: relative;
       z-index: 2;
@@ -75,7 +72,7 @@
       flex-direction: column;
       align-items: center;
       background: transparent;
-      overflow: hidden; 
+      overflow: hidden;
     }
 
     .page {
@@ -86,11 +83,9 @@
       flex-direction: column;
       align-items: center;
       padding: 16px 12px 0;
-      
       padding-bottom: 250px;
     }
 
-    
     .top-logos {
       position: absolute;
       top: 20px;
@@ -108,7 +103,6 @@
       display: block;
     }
 
-    
     .title-wrap {
       margin-top: 56px;
       margin-bottom: 12px;
@@ -127,7 +121,6 @@
       filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.22));
     }
 
-    
     .card {
       position: relative;
       width: 100%;
@@ -182,7 +175,6 @@
       margin-bottom: 14px;
     }
 
-    
     .search-area {
       display: flex;
       flex-direction: column;
@@ -251,7 +243,6 @@
       margin: 12px auto 0;
     }
 
-    
     .leaf {
       position: absolute;
       z-index: 7;
@@ -272,14 +263,12 @@
       height: auto;
     }
 
-    
-    
     .bottom-illustration {
       position: absolute;
       left: 50%;
       bottom: 0;
       transform: translateX(-50%);
-      width: 120%;            
+      width: 120%;
       height: 260px;
       z-index: 4;
       line-height: 0;
@@ -297,7 +286,6 @@
       padding: 0;
     }
 
-    
     @media (min-width: 500px) {
       .bottom-illustration {
         display: none !important;
@@ -307,7 +295,6 @@
       }
     }
 
-    
     @media (max-width: 430px) {
       .bottom-illustration {
         width: 125%;
@@ -315,7 +302,6 @@
       }
     }
 
-    
     @media (max-width: 380px) {
       .bottom-illustration {
         width: 130%;
@@ -323,7 +309,6 @@
       }
     }
 
-    
     @media (max-width: 340px) {
       .bottom-illustration {
         width: 135%;
@@ -331,7 +316,6 @@
       }
     }
 
-    
     .popup-overlay {
       position: fixed;
       inset: 0;
@@ -366,7 +350,6 @@
       animation: popIn 0.3s ease forwards;
     }
 
-    
     .popup-box.success {
       border-color: #1f8a4c;
     }
@@ -472,8 +455,6 @@
       color: #555555;
     }
 
-    
-    
     @media (min-width: 500px) {
       .bottom-illustration {
         display: none !important;
@@ -496,28 +477,25 @@
 </head>
 <body>
 
-  
+  <audio id="bgMusic" src="genrelagu.mp3" loop preload="auto"></audio>
+
   <div class="bg-wrapper" aria-hidden="true">
     <div class="bg-photo"></div>
     <div class="bg-overlay"></div>
   </div>
 
-  
   <div class="phone-frame">
     <div class="page">
 
-      
       <div class="top-logos">
         <img src="badung.png" alt="Logo Badung" />
         <img src="genre.png" alt="Logo Forum GenRe" />
       </div>
 
-      
       <div class="title-wrap">
         <img src="judul.png" alt="Open Recruitment Forum GenRe Kabupaten Badung Season 4" />
       </div>
 
-      
       <div class="card">
         <div class="card-header">
           <div class="oprec-logo">
@@ -554,7 +532,6 @@
         </div>
       </div>
 
-      
       <div class="bottom-illustration">
         <img src="kungfu.png" alt="Ilustrasi Gunung dan Kuil" />
       </div>
@@ -562,7 +539,6 @@
     </div>
   </div>
 
-  
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup-box" id="popupBox">
       <button class="popup-close" id="popupClose" aria-label="Tutup">×</button>
@@ -643,6 +619,22 @@
     const popupBox = document.getElementById("popupBox");
     const popupContent = document.getElementById("popupContent");
     const popupClose = document.getElementById("popupClose");
+    const bgMusic = document.getElementById("bgMusic");
+
+    function playMusic() {
+      if (!bgMusic) return;
+      bgMusic.volume = 0.6;
+      bgMusic.play().catch(function () {});
+    }
+    playMusic();
+    document.addEventListener("click", function once() {
+      playMusic();
+      document.removeEventListener("click", once);
+    });
+    document.addEventListener("touchstart", function onceTouch() {
+      playMusic();
+      document.removeEventListener("touchstart", onceTouch);
+    }, { passive: true });
 
     input.addEventListener("input", function () {
       const start = this.selectionStart;
@@ -710,7 +702,7 @@
         return;
       }
 
-        showPopup(`
+      showPopup(`
         <p class="pesan-utama">❗ Data Anda tidak ada di website</p>
         <p class="keterangan">
           Pastikan nama yang Anda masukkan sudah benar. Jika masih mengalami kendala, silakan hubungi panitia Open Recruitment Forum GenRe Kabupaten Badung Season 4.
