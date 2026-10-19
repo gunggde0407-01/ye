@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Open Recruitment Forum GenRe Kabupaten Badung Season 4</title>
   <style>
-    /* ===== RESET & BASE ===== */
+    
     *, *::before, *::after {
       margin: 0;
       padding: 0;
@@ -28,7 +28,7 @@
       justify-content: center;
     }
 
-    /* ===== BACKGROUND PHOTO + ANIMASI ===== */
+    
     .bg-wrapper {
       position: fixed;
       inset: 0;
@@ -63,7 +63,7 @@
       pointer-events: none;
     }
 
-    /* ===== WADAH UTAMA FIXED MOBILE (≈430px) ===== */
+    
     .phone-frame {
       position: relative;
       z-index: 2;
@@ -75,7 +75,7 @@
       flex-direction: column;
       align-items: center;
       background: transparent;
-      overflow: hidden; /* potong rapi di tepi bawah */
+      overflow: hidden; 
     }
 
     .page {
@@ -86,11 +86,11 @@
       flex-direction: column;
       align-items: center;
       padding: 16px 12px 0;
-      /* ruang di bawah agar konten tidak tertutup ilustrasi */
+      
       padding-bottom: 250px;
     }
 
-    /* ===== LOGO KIRI ATAS ===== */
+    
     .top-logos {
       position: absolute;
       top: 20px;
@@ -108,7 +108,7 @@
       display: block;
     }
 
-    /* ===== JUDUL ===== */
+    
     .title-wrap {
       margin-top: 56px;
       margin-bottom: 12px;
@@ -127,7 +127,7 @@
       filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.22));
     }
 
-    /* ===== KOTAK PENGUMUMAN ===== */
+    
     .card {
       position: relative;
       width: 100%;
@@ -182,7 +182,7 @@
       margin-bottom: 14px;
     }
 
-    /* Input + Tombol */
+    
     .search-area {
       display: flex;
       flex-direction: column;
@@ -251,7 +251,7 @@
       margin: 12px auto 0;
     }
 
-    /* ===== ORNAMEN DAUN ===== */
+    
     .leaf {
       position: absolute;
       z-index: 7;
@@ -272,14 +272,14 @@
       height: auto;
     }
 
-    /* ===== ILUSTRASI BAWAH ===== */
-    /* Tempel di bawah, full width + lebih besar agar tidak ada space samping */
+    
+    
     .bottom-illustration {
       position: absolute;
       left: 50%;
       bottom: 0;
       transform: translateX(-50%);
-      width: 120%;            /* lebih lebar dari frame agar samping tertutup */
+      width: 120%;            
       height: 260px;
       z-index: 4;
       line-height: 0;
@@ -297,7 +297,7 @@
       padding: 0;
     }
 
-    /* Sembunyikan saat layar melebar (tablet/laptop) */
+    
     @media (min-width: 500px) {
       .bottom-illustration {
         display: none !important;
@@ -307,7 +307,7 @@
       }
     }
 
-    /* HP sedang (~430px = ukuran frame desain) */
+    
     @media (max-width: 430px) {
       .bottom-illustration {
         width: 125%;
@@ -315,7 +315,7 @@
       }
     }
 
-    /* HP kecil */
+    
     @media (max-width: 380px) {
       .bottom-illustration {
         width: 130%;
@@ -323,7 +323,7 @@
       }
     }
 
-    /* HP sangat kecil */
+    
     @media (max-width: 340px) {
       .bottom-illustration {
         width: 135%;
@@ -331,7 +331,7 @@
       }
     }
 
-    /* ===== POPUP HASIL ===== */
+    
     .popup-overlay {
       position: fixed;
       inset: 0;
@@ -366,7 +366,7 @@
       animation: popIn 0.3s ease forwards;
     }
 
-    /* Popup LOLOS = hijau, tanpa merah */
+    
     .popup-box.success {
       border-color: #1f8a4c;
     }
@@ -472,8 +472,8 @@
       color: #555555;
     }
 
-    /* Penyesuaian layar sangat kecil */
-    /* Sembunyikan ilustrasi bawah di device non-HP (tablet/laptop/desktop) */
+    
+    
     @media (min-width: 500px) {
       .bottom-illustration {
         display: none !important;
@@ -496,28 +496,28 @@
 </head>
 <body>
 
-  <!-- BACKGROUND -->
+  
   <div class="bg-wrapper" aria-hidden="true">
     <div class="bg-photo"></div>
     <div class="bg-overlay"></div>
   </div>
 
-  <!-- WADAH UTAMA FIXED MOBILE -->
+  
   <div class="phone-frame">
     <div class="page">
 
-      <!-- Logo kiri atas -->
+      
       <div class="top-logos">
         <img src="badung.png" alt="Logo Badung" />
         <img src="genre.png" alt="Logo Forum GenRe" />
       </div>
 
-      <!-- Judul -->
+      
       <div class="title-wrap">
         <img src="judul.png" alt="Open Recruitment Forum GenRe Kabupaten Badung Season 4" />
       </div>
 
-      <!-- Kotak Pengumuman -->
+      
       <div class="card">
         <div class="card-header">
           <div class="oprec-logo">
@@ -554,7 +554,7 @@
         </div>
       </div>
 
-      <!-- Ilustrasi gunung & kuil -->
+      
       <div class="bottom-illustration">
         <img src="kungfu.png" alt="Ilustrasi Gunung dan Kuil" />
       </div>
@@ -562,7 +562,7 @@
     </div>
   </div>
 
-  <!-- ===== POPUP HASIL ===== -->
+  
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup-box" id="popupBox">
       <button class="popup-close" id="popupClose" aria-label="Tutup">×</button>
@@ -636,7 +636,6 @@
       "JESSICA ADELINE MARTANNI",
       "I PUTU CANDRA ARTA WIGUNA"
     ];
-
 
     const input = document.getElementById("namaInput");
     const btnCek = document.getElementById("btnCek");
