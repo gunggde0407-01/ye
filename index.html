@@ -370,17 +370,35 @@
     .popup-box.success {
       border-color: #1f8a4c;
     }
-
     .popup-box.success .popup-close {
       background: #1f8a4c;
     }
-
     .popup-box.success .popup-close:hover {
       background: #176b3a;
     }
-
     .popup-box.success .peserta-nama {
       color: #1f8a4c;
+    }
+    .popup-box.success .highlight {
+      color: #1f8a4c;
+      font-weight: 800;
+    }
+
+    .popup-box.fail {
+      border-color: #c62828;
+    }
+    .popup-box.fail .popup-close {
+      background: #c62828;
+    }
+    .popup-box.fail .popup-close:hover {
+      background: #a01f1f;
+    }
+    .popup-box.fail .peserta-nama {
+      color: #c62828;
+    }
+    .popup-box.fail .highlight {
+      color: #c62828;
+      font-weight: 800;
     }
 
     @keyframes popIn {
@@ -553,7 +571,6 @@
   </div>
 
   <script>
-    // ===== DAFTAR PESERTA LOLOS =====
     const lolos = [
       "KOMANG TRIYA REGINA GAYATRI",
       "FAJAR ALI SABANA",
@@ -582,7 +599,6 @@
       "NI KOMANG SRI NATASYA"
     ];
 
-    // ===== DAFTAR PESERTA TIDAK LOLOS =====
     const tidakLolos = [
       "NI PUTU KESYA KIRANA PUTRI",
       "GUSTI AGUNG CINTA FEBRIANA PUTRI",
@@ -621,8 +637,6 @@
       "I PUTU CANDRA ARTA WIGUNA"
     ];
 
-    // Peserta mengundurkan diri TIDAK dimasukkan
-    // NI PUTU PUTRI WULAN PURNAMA SARI → pesan data tidak ada
 
     const input = document.getElementById("namaInput");
     const btnCek = document.getElementById("btnCek");
@@ -631,7 +645,6 @@
     const popupContent = document.getElementById("popupContent");
     const popupClose = document.getElementById("popupClose");
 
-    // Otomatis ubah input menjadi HURUF KAPITAL (hanya nama)
     input.addEventListener("input", function () {
       const start = this.selectionStart;
       const end = this.selectionEnd;
@@ -644,10 +657,11 @@
     }
 
     function showPopup(html, type) {
-      // type: "success" | "fail" | "notfound"
       popupContent.innerHTML = html;
       if (type === "success") {
         popupBox.className = "popup-box success";
+      } else if (type === "fail") {
+        popupBox.className = "popup-box fail";
       } else if (type === "notfound") {
         popupBox.className = "popup-box not-found";
       } else {
@@ -680,7 +694,7 @@
           <img src="berhasil.png" alt="Berhasil" class="status-img" />
           <p class="peserta-nama">${nama}</p>
           <p class="pesan">
-            Selamat! Anda dinyatakan lolos Open Recruitment Forum GenRe Kabupaten Badung Season 4 Tahun 2026.
+            Selamat! Anda dinyatakan <span class="highlight">LOLOS</span> Open Recruitment Forum GenRe Kabupaten Badung Season 4 Tahun 2026.
           </p>
         `, "success");
         return;
@@ -691,14 +705,13 @@
           <img src="gagal.png" alt="Gagal" class="status-img" />
           <p class="peserta-nama">${nama}</p>
           <p class="pesan">
-            Mohon maaf, Anda belum dinyatakan lolos Open Recruitment Forum GenRe Kabupaten Badung Season 4 Tahun 2026. Tetap semangat dan jangan menyerah!
+            Mohon maaf, Anda dinyatakan <span class="highlight">TIDAK LOLOS</span> Open Recruitment Forum GenRe Kabupaten Badung Season 4 Tahun 2026. Tetap semangat dan jangan menyerah!
           </p>
         `, "fail");
         return;
       }
 
-      // Nama tidak ditemukan / mengundurkan diri
-      showPopup(`
+        showPopup(`
         <p class="pesan-utama">❗ Data Anda tidak ada di website</p>
         <p class="keterangan">
           Pastikan nama yang Anda masukkan sudah benar. Jika masih mengalami kendala, silakan hubungi panitia Open Recruitment Forum GenRe Kabupaten Badung Season 4.
@@ -715,17 +728,14 @@
       }
     });
 
-    // Tutup popup
     popupClose.addEventListener("click", closePopup);
 
-    // Klik di luar popup juga menutup
     popupOverlay.addEventListener("click", function (e) {
       if (e.target === popupOverlay) {
         closePopup();
       }
     });
 
-    // Tombol Escape
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
         closePopup();
