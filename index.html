@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Open Recruitment Forum GenRe Kabupaten Badung Season 4</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      background-color: #e8e8e8;
+      color: #111111;
+    }
+
+    body {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ===== BACKGROUND PHOTO + ANIMASI ===== */
+    .bg-wrapper {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-photo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 130%;
+      height: 100%;
+      background-image: url("fotobersama.png");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      will-change: transform;
+      animation: bg-pan 32s ease-in-out infinite alternate;
+    }
+
+    @keyframes bg-pan {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-18%); }
+    }
+
+    .bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.82);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ===== WADAH UTAMA FIXED MOBILE (≈430px) ===== */
+    .phone-frame {
+      position: relative;
+      z-index: 2;
+      width: 430px;
+      max-width: 100%;
+      min-height: 100vh;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: transparent;
+      overflow: hidden; /* potong rapi di tepi bawah */
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 12px 0;
+      /* ruang di bawah agar konten tidak tertutup ilustrasi */
+      padding-bottom: 250px;
+    }
+
+    /* ===== LOGO KIRI ATAS ===== */
+    .top-logos {
+      position: absolute;
+      top: 20px;
+      left: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .top-logos img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ===== JUDUL ===== */
+    .title-wrap {
+      margin-top: 56px;
+      margin-bottom: 12px;
+      text-align: center;
+      z-index: 5;
+      width: 100%;
+      padding: 0 6px;
+    }
+
+    .title-wrap img {
+      max-width: 380px;
+      width: 94%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.22));
+    }
+
+    /* ===== KOTAK PENGUMUMAN ===== */
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 410px;
+      background: #ffffff;
+      border: 2px solid #912c35;
+      border-radius: 16px;
+      box-shadow: 0 10px 32px rgba(145, 44, 53, 0.16);
+      overflow: visible;
+      z-index: 5;
+    }
+
+    .card-header {
+      height: 52px;
+      background: #912c35;
+      border-radius: 14px 14px 0 0;
+      position: relative;
+    }
+
+    .oprec-logo {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -50%);
+      width: 72px;
+      height: 72px;
+      background: #ffffff;
+      border-radius: 50%;
+      border: 3px solid #912c35;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+      z-index: 6;
+    }
+
+    .oprec-logo img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+
+    .card-body {
+      padding: 40px 16px 20px;
+      text-align: center;
+    }
+
+    .card-body > p.intro {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #111111;
+      margin-bottom: 14px;
+    }
+
+    /* Input + Tombol */
+    .search-area {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .input-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+    }
+
+    .name-input {
+      width: 100%;
+      height: 46px;
+      border: 2px solid #912c35;
+      border-radius: 999px;
+      padding: 0 18px;
+      font-size: 14px;
+      color: #111111;
+      background: #ffffff;
+      outline: none;
+      text-align: center;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .name-input::placeholder {
+      color: #888888;
+      font-size: 12.5px;
+    }
+
+    .name-input:focus {
+      box-shadow: 0 0 0 3px rgba(145, 44, 53, 0.18);
+    }
+
+    .btn-cek {
+      width: 100%;
+      max-width: 340px;
+      height: 46px;
+      background: #912c35;
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn-cek:hover {
+      background: #7a242c;
+    }
+
+    .btn-cek:active {
+      transform: scale(0.98);
+    }
+
+    .hint {
+      font-size: 11.5px;
+      line-height: 1.45;
+      color: #555555;
+      max-width: 320px;
+      margin: 12px auto 0;
+    }
+
+    /* ===== ORNAMEN DAUN ===== */
+    .leaf {
+      position: absolute;
+      z-index: 7;
+      pointer-events: none;
+    }
+
+    .leaf-top-right {
+      top: -28px;
+      right: -34px;
+      width: 110px;
+      height: auto;
+    }
+
+    .leaf-bottom-left {
+      bottom: -24px;
+      left: -36px;
+      width: 102px;
+      height: auto;
+    }
+
+    /* ===== ILUSTRASI BAWAH ===== */
+    /* Tempel di bawah, full width + lebih besar agar tidak ada space samping */
+    .bottom-illustration {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 120%;            /* lebih lebar dari frame agar samping tertutup */
+      height: 260px;
+      z-index: 4;
+      line-height: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .bottom-illustration img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: bottom center;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Sembunyikan saat layar melebar (tablet/laptop) */
+    @media (min-width: 500px) {
+      .bottom-illustration {
+        display: none !important;
+      }
+      .page {
+        padding-bottom: 20px !important;
+      }
+    }
+
+    /* HP sedang (~430px = ukuran frame desain) */
+    @media (max-width: 430px) {
+      .bottom-illustration {
+        width: 125%;
+        height: 240px;
+      }
+    }
+
+    /* HP kecil */
+    @media (max-width: 380px) {
+      .bottom-illustration {
+        width: 130%;
+        height: 210px;
+      }
+    }
+
+    /* HP sangat kecil */
+    @media (max-width: 340px) {
+      .bottom-illustration {
+        width: 135%;
+        height: 190px;
+      }
+    }
+
+    /* ===== POPUP HASIL ===== */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .popup-overlay.show {
+      display: flex;
+      animation: fadeIn 0.25s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .popup-box {
+      position: relative;
+      background: #ffffff;
+      border: 2px solid #912c35;
+      border-radius: 18px;
+      padding: 28px 22px 24px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+      animation: popIn 0.3s ease forwards;
+    }
+
+    /* Popup LOLOS = hijau, tanpa merah */
+    .popup-box.success {
+      border-color: #1f8a4c;
+    }
+
+    .popup-box.success .popup-close {
+      background: #1f8a4c;
+    }
+
+    .popup-box.success .popup-close:hover {
+      background: #176b3a;
+    }
+
+    .popup-box.success .peserta-nama {
+      color: #1f8a4c;
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.88) translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: #912c35;
+      color: #ffffff;
+      border-radius: 50%;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .popup-close:hover {
+      background: #7a242c;
+      transform: scale(1.08);
+    }
+
+    .popup-box img.status-img {
+      width: 130px;
+      height: auto;
+      margin: 8px auto 16px;
+      display: block;
+    }
+
+    .popup-box .peserta-nama {
+      font-size: 15px;
+      font-weight: 700;
+      color: #912c35;
+      margin-bottom: 12px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .popup-box .pesan {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: #222222;
+    }
+
+    .popup-box.not-found .pesan-utama {
+      font-size: 15px;
+      font-weight: 700;
+      color: #912c35;
+      margin-bottom: 10px;
+    }
+
+    .popup-box.not-found .keterangan {
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: #555555;
+    }
+
+    /* Penyesuaian layar sangat kecil */
+    /* Sembunyikan ilustrasi bawah di device non-HP (tablet/laptop/desktop) */
+    @media (min-width: 500px) {
+      .bottom-illustration {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .phone-frame { width: 100%; }
+      .title-wrap img { max-width: 300px; }
+      .card { max-width: 96%; }
+      .top-logos img { height: 42px; }
+      .oprec-logo { width: 64px; height: 64px; }
+      .oprec-logo img { width: 50px; height: 50px; }
+      .leaf-top-right { width: 90px; right: -26px; top: -22px; }
+      .leaf-bottom-left { width: 84px; left: -28px; bottom: -18px; }
+      .page { padding-bottom: 200px; }
+      .popup-box { max-width: 94%; padding: 24px 16px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="bg-wrapper" aria-hidden="true">
+    <div class="bg-photo"></div>
+    <div class="bg-overlay"></div>
+  </div>
+
+  <!-- WADAH UTAMA FIXED MOBILE -->
+  <div class="phone-frame">
+    <div class="page">
+
+      <!-- Logo kiri atas -->
+      <div class="top-logos">
+        <img src="badung.png" alt="Logo Badung" />
+        <img src="genre.png" alt="Logo Forum GenRe" />
+      </div>
+
+      <!-- Judul -->
+      <div class="title-wrap">
+        <img src="judul.png" alt="Open Recruitment Forum GenRe Kabupaten Badung Season 4" />
+      </div>
+
+      <!-- Kotak Pengumuman -->
+      <div class="card">
+        <div class="card-header">
+          <div class="oprec-logo">
+            <img src="oprec.png" alt="Logo Open Recruitment" />
+          </div>
+        </div>
+
+        <img src="daun1.png" alt="" class="leaf leaf-top-right" />
+        <img src="daun2.png" alt="" class="leaf leaf-bottom-left" />
+
+        <div class="card-body">
+          <p class="intro">
+            Selamat datang di halaman pengumuman Open Recruitment Forum GenRe Kabupaten Badung Season 4.<br /><br />
+            Masukkan nama lengkap Anda untuk melihat hasil seleksi.
+          </p>
+
+          <div class="search-area">
+            <div class="input-wrap">
+              <input
+                type="text"
+                id="namaInput"
+                class="name-input"
+                placeholder="Masukkan nama lengkap Anda"
+                autocomplete="off"
+                aria-label="Kolom nama lengkap"
+              />
+            </div>
+            <button type="button" class="btn-cek" id="btnCek">Cek Hasil</button>
+          </div>
+
+          <p class="hint">
+            Gunakan huruf kapital semua. Contoh: I KETUT DAVE NARADA PUTRA SIWI
+          </p>
+        </div>
+      </div>
+
+      <!-- Ilustrasi gunung & kuil -->
+      <div class="bottom-illustration">
+        <img src="kungfu.png" alt="Ilustrasi Gunung dan Kuil" />
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== POPUP HASIL ===== -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-box" id="popupBox">
+      <button class="popup-close" id="popupClose" aria-label="Tutup">×</button>
+      <div id="popupContent"></div>
+    </div>
+  </div>
+
+  <script>
+    // ===== DAFTAR PESERTA LOLOS =====
+    const lolos = [
+      "KOMANG TRIYA REGINA GAYATRI",
+      "FAJAR ALI SABANA",
+      "TRIE AMIRA PRAMESWARI",
+      "I KOMANG DEWAKA WAHYU PRADNYANATHA",
+      "I NYOMAN PURNA WIRAYUDA KUSUMA PUTRA",
+      "I KETUT HARTA TRIA WIGUNA",
+      "NI KADEK LARASATI",
+      "KEISHA HUMAIRA",
+      "DEWA AYU ALEXIA ARIYASTUTI",
+      "NI KADEK BINTANG AYUDIA MAHARANI",
+      "NI KADEK KEISHA MAHESWARI",
+      "I GEDE RENDY MAHARDIKA",
+      "I GUSTI AYU DIAH SUPUTRI",
+      "ANTONIO GRAMSCI HUSADA",
+      "NI KADEK GADIS MEIRA ARDIAN",
+      "I GUSTI AYU SERI MAHESWARI",
+      "AGUS HENDRA PRADIPTA",
+      "NI WAYAN VENITA KARUNIA KINANTI",
+      "NI MADE CINDY GITAFREYA PUTRI",
+      "HANINDYA MAHAPUTRI",
+      "I GUSTI BAGUS RANGGA MANDALA SANTIKA",
+      "I WAYAN GERIA HARY SANJAYA",
+      "NI KADEK SHIREEN PASTRISIYA PUTRI",
+      "PUTU NALA CALISTA PUTRI WIJAYA",
+      "NI KOMANG SRI NATASYA"
+    ];
+
+    // ===== DAFTAR PESERTA TIDAK LOLOS =====
+    const tidakLolos = [
+      "NI PUTU KESYA KIRANA PUTRI",
+      "GUSTI AGUNG CINTA FEBRIANA PUTRI",
+      "KADEK DEVA DWIPAYANA",
+      "JOSEPHINE THESIA HARIYANTO",
+      "SI NGURAH PREMA NANDA KRISNAYANA",
+      "NI WAYAN WIDYA AGUSTINI",
+      "PUTU AYU KIRANA MAHARANI",
+      "NI PUTU ANANDA SAVITRI DEWI",
+      "CHRISTIN ANGEL ANASTASIA",
+      "DEKTU YUKI ADIASA SWAGATA",
+      "I KOMANG TRIJAYA PRAMANA ALDI PUTRA",
+      "NI KADEK VIRGA TARA SEPTYANTARI",
+      "ATHIRA BASILLIA NURUL VALESKA",
+      "AYU UMA PARAMITA ASMARA",
+      "LUH PUTU EKA HARTAYANI",
+      "NI PUTU ANGELIKA PRAYOGI KADE",
+      "KADEK PUTRI CAHAYA WINATA",
+      "LUH PUTU META ANGGRRENI",
+      "DEWI CANTIKA PUTRI PRASETYA",
+      "NI PUTU RAHAYU ANDINI PUTRI",
+      "NI PUTU DEA ANANDA MAHARANI",
+      "I MADE DEVA DWIGUNA",
+      "IDA AYU PUTU WULAN ANGGR AENY",
+      "I KADEK PANDE DWI ARTAWAN",
+      "NI PUTU YUNIKA SANISCA",
+      "NI KADEK DEVIKA PRADNYA AYU",
+      "NI KETUT ANGGUN SRI DEVIKA",
+      "NYOMAN SRI NATA ADNYANI",
+      "GEK PUTU ARYA GHITA PARAMITA",
+      "NI MADE SUKMA PRADNYA MAHESWARI",
+      "NI PUTU CANDRA NINGSIH",
+      "RASYA BAYU NOER SATYA",
+      "AYU DIANDRA PUTRI",
+      "JESSICA ADELINE MARTANNI",
+      "I PUTU CANDRA ARTA WIGUNA"
+    ];
+
+    // Peserta mengundurkan diri TIDAK dimasukkan
+    // NI PUTU PUTRI WULAN PURNAMA SARI → pesan data tidak ada
+
+    const input = document.getElementById("namaInput");
+    const btnCek = document.getElementById("btnCek");
+    const popupOverlay = document.getElementById("popupOverlay");
+    const popupBox = document.getElementById("popupBox");
+    const popupContent = document.getElementById("popupContent");
+    const popupClose = document.getElementById("popupClose");
+
+    // Otomatis ubah input menjadi HURUF KAPITAL (hanya nama)
+    input.addEventListener("input", function () {
+      const start = this.selectionStart;
+      const end = this.selectionEnd;
+      this.value = this.value.toUpperCase();
+      this.setSelectionRange(start, end);
+    });
+
+    function normalize(str) {
+      return str.trim().replace(/\s+/g, " ");
+    }
+
+    function showPopup(html, type) {
+      // type: "success" | "fail" | "notfound"
+      popupContent.innerHTML = html;
+      if (type === "success") {
+        popupBox.className = "popup-box success";
+      } else if (type === "notfound") {
+        popupBox.className = "popup-box not-found";
+      } else {
+        popupBox.className = "popup-box";
+      }
+      popupOverlay.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closePopup() {
+      popupOverlay.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    function cekHasil() {
+      const nama = normalize(input.value.toUpperCase());
+
+      if (!nama) {
+        showPopup(`
+          <p class="pesan-utama">❗ Data Anda tidak ada di website</p>
+          <p class="keterangan">
+            Pastikan nama yang Anda masukkan sudah benar. Jika masih mengalami kendala, silakan hubungi panitia Open Recruitment Forum GenRe Kabupaten Badung Season 4.
+          </p>
+        `, "notfound");
+        return;
+      }
+
+      if (lolos.includes(nama)) {
+        showPopup(`
+          <img src="berhasil.png" alt="Berhasil" class="status-img" />
+          <p class="peserta-nama">${nama}</p>
+          <p class="pesan">
+            Selamat! Anda dinyatakan lolos Open Recruitment Forum GenRe Kabupaten Badung Season 4 Tahun 2026.
+          </p>
+        `, "success");
+        return;
+      }
+
+      if (tidakLolos.includes(nama)) {
+        showPopup(`
+          <img src="gagal.png" alt="Gagal" class="status-img" />
+          <p class="peserta-nama">${nama}</p>
+          <p class="pesan">
+            Mohon maaf, Anda belum dinyatakan lolos Open Recruitment Forum GenRe Kabupaten Badung Season 4 Tahun 2026. Tetap semangat dan jangan menyerah!
+          </p>
+        `, "fail");
+        return;
+      }
+
+      // Nama tidak ditemukan / mengundurkan diri
+      showPopup(`
+        <p class="pesan-utama">❗ Data Anda tidak ada di website</p>
+        <p class="keterangan">
+          Pastikan nama yang Anda masukkan sudah benar. Jika masih mengalami kendala, silakan hubungi panitia Open Recruitment Forum GenRe Kabupaten Badung Season 4.
+        </p>
+      `, "notfound");
+    }
+
+    btnCek.addEventListener("click", cekHasil);
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        cekHasil();
+      }
+    });
+
+    // Tutup popup
+    popupClose.addEventListener("click", closePopup);
+
+    // Klik di luar popup juga menutup
+    popupOverlay.addEventListener("click", function (e) {
+      if (e.target === popupOverlay) {
+        closePopup();
+      }
+    });
+
+    // Tombol Escape
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        closePopup();
+      }
+    });
+  </script>
+</body>
+</html>
